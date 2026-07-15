@@ -156,7 +156,6 @@
             LabelId.Name = "LabelId";
             LabelId.Size = new Size(69, 36);
             LabelId.TabIndex = 1;
-            LabelId.Text = "458";
             LabelId.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label1
@@ -188,6 +187,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(473, 337);
             dataGridView1.TabIndex = 3;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // btnBuscar
             // 

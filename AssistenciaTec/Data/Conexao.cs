@@ -10,7 +10,7 @@ namespace AssistenciaTec.Data
 {
     public class Conexao
     {
-        private static readonly string ConexaoString = @"Server=OSA0716396W11-1\SQLEXPRESS;Database=db_assistencia;Trusted_Connection=True;TrustServerCertificate=True;";
+        private static readonly string ConexaoString = @"Server=OSA0716375W11-1\SQLEXPRESS;Database=db_assistencia;Trusted_Connection=True;TrustServerCertificate=True;";
 
        public static SqlConnection GetConexao()
         {
@@ -21,12 +21,12 @@ namespace AssistenciaTec.Data
                 var conexao = new SqlConnection(ConexaoString);
                 conexao.Open();
 
-                MessageBox.Show(
-                    "Conexão efetuada com sucesso", 
-                    "Conectado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                //MessageBox.Show(
+                //    "Conexão efetuada com sucesso", 
+                //    "Conectado",
+                //    MessageBoxButtons.OK,
+                //    MessageBoxIcon.Information
+                //);
 
                 return conexao;
             }
