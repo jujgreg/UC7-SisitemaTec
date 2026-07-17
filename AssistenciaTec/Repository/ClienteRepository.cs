@@ -70,10 +70,53 @@ namespace AssistenciaTec.Repository
                 cliente.Email = resultado.GetString(resultado.GetOrdinal("email"));
                 cliente.Endereco = resultado.GetString(resultado.GetOrdinal("endereco"));
                 clientes.Add(cliente);
-                
+
             }
 
             return clientes;
         }
+
+        public int excluir(int id)
+        {
+            var sql = "DELETE FROM tbl_clientes WHERE cliente_id = @id";
+
+            using var conexao = Conexao.GetConexao();
+
+            using var command = new SqlCommand(sql, conexao);
+
+            command.Parameters.AddWithValue("id", id);
+
+            //executar o comando
+            var resultado = command.ExecuteNonQuery();
+
+            return resultado;
+
+        }
+
+        public int atualizar(Cliente cliente)
+        {
+            //valores SQL
+            var sql = "UPDATE tbl_clientes " +
+                "SET nome = @Nome, " +
+                "email = @Email, " +
+                "telefone = @Telefone, " +
+                "endereco = @Endereco " +
+                "WHERE  cliente_id = @id";
+            //conexao
+            using var conexao = Conexao.GetConexao();
+
+            using var command = new SqlCommand(sql, conexao);
+
+            command.Parameters.AddWithValue("@Nome", cliente.Name);
+            command.Parameters.AddWithValue("@Email", cliente.Email);
+            command.Parameters.AddWithValue("@Telefone", cliente.Telefone);
+            command.Parameters.AddWithValue("@Endereco", cliente.Endereco);
+            command.Parameters.AddWithValue("id", cliente.Id);
+
+            var resultado = command.ExecuteNonQuery();
+
+            return resultado;
+        }
+
     }
 }

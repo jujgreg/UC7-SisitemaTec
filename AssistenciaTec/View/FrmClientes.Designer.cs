@@ -182,12 +182,17 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(15, 101);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(473, 337);
             dataGridView1.TabIndex = 3;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellEnter += dataGridView1_CellEnter;
             // 
             // btnBuscar
             // 
@@ -256,6 +261,7 @@
             toolStripButtonExcluir.Size = new Size(28, 32);
             toolStripButtonExcluir.Text = "toolStripButton3";
             toolStripButtonExcluir.ToolTipText = "Excluir cliente selecionado";
+            toolStripButtonExcluir.Click += toolStripButtonExcluir_Click;
             // 
             // toolStripSeparator1
             // 
