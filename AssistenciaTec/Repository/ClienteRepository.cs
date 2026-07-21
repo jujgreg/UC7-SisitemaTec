@@ -118,5 +118,39 @@ namespace AssistenciaTec.Repository
             return resultado;
         }
 
+        public List<Cliente> pesquisarNome(string nome)
+        {
+            var sql = "SELECT * FROM tbl_clientes " +
+                "WHERE nome " +
+                "LIKE @nome ORDER BY nome ASC";
+
+            using var conexao = Conexao.GetConexao();
+
+            using var command = new SqlCommand(sql, conexao);
+            command.Parameters.AddWithValue("@nome", "%" + nome + "%");
+
+
+            using var resultado = command.ExecuteReader();
+
+           
+            List<Cliente> clientes = new List<Cliente>();
+
+            while (resultado.Read())
+            {
+                Cliente cliente = new Cliente();
+                cliente.Id = resultado.GetInt32(resultado.GetOrdinal("cliente_id"));
+                cliente.Name = resultado.GetString(resultado.GetOrdinal("nome"));
+                cliente.Telefone = resultado.GetString(resultado.GetOrdinal("telefone"));
+                cliente.Email = resultado.GetString(resultado.GetOrdinal("email"));
+                cliente.Endereco = resultado.GetString(resultado.GetOrdinal("endereco"));
+                clientes.Add(cliente);
+
+            }
+
+            return clientes;
+
+            return null;
+        }
+
     }
 }

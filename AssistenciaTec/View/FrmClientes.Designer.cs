@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmClientes));
             GroupBoxDadosCliente = new GroupBox();
             TxtEndereco = new TextBox();
@@ -43,7 +44,7 @@
             groupBox1 = new GroupBox();
             dataGridView1 = new DataGridView();
             btnBuscar = new Button();
-            textBox1 = new TextBox();
+            txtBuscarNome = new TextBox();
             label6 = new Label();
             toolStrip1 = new ToolStrip();
             toolStripButtonNovo = new ToolStripButton();
@@ -55,12 +56,14 @@
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
             label7 = new Label();
+            errorProvider1 = new ErrorProvider(components);
             GroupBoxDadosCliente.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             toolStrip1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // GroupBoxDadosCliente
@@ -171,7 +174,7 @@
             // 
             groupBox1.Controls.Add(dataGridView1);
             groupBox1.Controls.Add(btnBuscar);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txtBuscarNome);
             groupBox1.Controls.Add(label6);
             groupBox1.Location = new Point(334, 75);
             groupBox1.Name = "groupBox1";
@@ -202,13 +205,14 @@
             btnBuscar.Size = new Size(46, 42);
             btnBuscar.TabIndex = 2;
             btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
             // 
-            // textBox1
+            // txtBuscarNome
             // 
-            textBox1.Location = new Point(15, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(421, 25);
-            textBox1.TabIndex = 1;
+            txtBuscarNome.Location = new Point(15, 52);
+            txtBuscarNome.Name = "txtBuscarNome";
+            txtBuscarNome.Size = new Size(421, 25);
+            txtBuscarNome.TabIndex = 1;
             // 
             // label6
             // 
@@ -322,6 +326,10 @@
             label7.TabIndex = 0;
             label7.Text = "Cadastro de Clientes";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // FrmClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 18F);
@@ -347,6 +355,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -367,7 +376,7 @@
         private GroupBox groupBox1;
         private Label label6;
         private Button btnBuscar;
-        private TextBox textBox1;
+        private TextBox txtBuscarNome;
         private DataGridView dataGridView1;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButtonNovo;
@@ -379,5 +388,6 @@
         private Panel panel1;
         private PictureBox pictureBox1;
         private Label label7;
+        private ErrorProvider errorProvider1;
     }
 }

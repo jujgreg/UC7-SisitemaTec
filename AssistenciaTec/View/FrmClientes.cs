@@ -54,6 +54,35 @@ namespace AssistenciaTec.View
 
 
         }
+        private void CarregarGridClientes(string nome)
+        {
+            //criar o repositorio do get clientes
+            ClienteRepository clienteRepository = new ClienteRepository();
+
+            clientes = clienteRepository.pesquisarNome(nome);
+
+            //carregar os dados
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoGenerateColumns = false;
+
+            DataGridViewTextBoxColumn colunaId = new DataGridViewTextBoxColumn();
+            colunaId.DataPropertyName = "Id";
+            colunaId.HeaderText = "Identidade";
+            colunaId.Width = 80;
+            dataGridView1.Columns.Add(colunaId);
+
+            DataGridViewTextBoxColumn colunaNome = new DataGridViewTextBoxColumn();
+            colunaNome.DataPropertyName = "Name";
+            colunaNome.HeaderText = "Nomes";
+            colunaNome.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns.Add(colunaNome);
+
+            //informar de onde vem os dados da tabela
+            dataGridView1.DataSource = clientes;
+
+
+
+        }
 
         private void DesabilitarBotoesCancelarSalvar()
         {
@@ -103,10 +132,20 @@ namespace AssistenciaTec.View
         {
             //criar um cliente 
             Cliente cliente = new Cliente();
-            cliente.Name = TxtNome.Text;
-            cliente.Email = TxtEmail.Text;
-            cliente.Telefone = TxtTelefone.Text;
-            cliente.Endereco = TxtEndereco.Text;
+
+
+            try
+            {
+                cliente.Name = TxtNome.Text;
+                cliente.Email = TxtEmail.Text;
+                cliente.Telefone = TxtTelefone.Text;
+                cliente.Endereco = TxtEndereco.Text;
+            }
+            catch (ArgumentException Erro)
+            {
+                MessageBox.Show(Erro.Message);
+                return;
+            }
 
             //criar repositorio cliente
             ClienteRepository clienteRepository = new ClienteRepository();
@@ -128,8 +167,8 @@ namespace AssistenciaTec.View
                 clienteRepository.atualizar(cliente);
             }
 
-           
-           
+
+
 
 
             DesabilitarBotoesCancelarSalvar();
@@ -177,21 +216,21 @@ namespace AssistenciaTec.View
         private void toolStripButtonExcluir_Click(object sender, EventArgs e)
         {
 
-           var resposta =  MessageBox.Show(
-                "deseja realmente excluir o cliente " + TxtNome.Text + " selecionado?",
-                "Exclusão cliente",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
+            var resposta = MessageBox.Show(
+                 "deseja realmente excluir o cliente " + TxtNome.Text + " selecionado?",
+                 "Exclusão cliente",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Question
 
-                
-                );
-            if( resposta == DialogResult.Yes)
+
+                 );
+            if (resposta == DialogResult.Yes)
             {
                 var clienteRepository = new ClienteRepository();
                 var idSelecionado = int.Parse(LabelId.Text);
 
                 var excluidos = clienteRepository.excluir(idSelecionado);
-                if(excluidos > 0)
+                if (excluidos > 0)
                 {
                     MessageBox.Show(
                         "Cliente " + TxtNome.Text + " excluido com sucesso",
@@ -210,6 +249,11 @@ namespace AssistenciaTec.View
             HabilitarBotoesCancelarSalvar();
 
 
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CarregarGridClientes(txtBuscarNome.Text);
         }
     }
 }
